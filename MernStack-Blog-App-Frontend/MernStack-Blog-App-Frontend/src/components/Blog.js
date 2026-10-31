@@ -14,27 +14,35 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useStyles } from "./utils";
+
+const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
 const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
   const classes = useStyles();
   const navigate = useNavigate();
+
   const handleEdit = () => {
     navigate(`/myBlogs/${id}`);
   };
+
   const deleteRequest = async () => {
-    const res = await axios
-      .delete(`http://localhost:5000/api/blog/${id}`)
-      .catch((err) => console.log(err));
-    const data = await res.data;
-    return data;
+    try {
+      const res = await axios.delete(`${API}/api/blog/${id}`);
+      return res.data;
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
   };
+
   const handleDelete = () => {
     deleteRequest()
       .then(() => navigate("/"))
       .then(() => navigate("/blogs"));
   };
+
   return (
     <div>
-      {" "}
       <Card
         sx={{
           width: "40%",
@@ -73,9 +81,8 @@ const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
           component="img"
           height="194"
           image={imageURL}
-          alt="Paella dish"
+          alt={title}
         />
-
         <CardContent>
           <hr />
           <br />

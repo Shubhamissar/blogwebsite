@@ -5,20 +5,21 @@ import BlogDetail from "./components/BlogDetail";
 import AddBlog from "./components/AddBlog";
 
 import React, { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Auth from "./components/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./store";
-function App() {
-  const dispath = useDispatch();
 
+function App() {
+  const dispatch = useDispatch();
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
-  console.log(isLoggedIn);
+
   useEffect(() => {
     if (localStorage.getItem("userId")) {
-      dispath(authActions.login());
+      dispatch(authActions.login());
     }
-  }, [dispath]);
+  }, [dispatch]);
+
   return (
     <React.Fragment>
       <header>
@@ -27,13 +28,17 @@ function App() {
       <main>
         <Routes>
           {!isLoggedIn ? (
-            <Route path="/auth" element={<Auth />} />
+            <>
+              <Route path="/auth" element={<Auth />} />
+              <Route path="*" element={<Navigate to="/auth" replace />} />
+            </>
           ) : (
             <>
               <Route path="/blogs" element={<Blogs />} />
               <Route path="/blogs/add" element={<AddBlog />} />
               <Route path="/myBlogs" element={<UserBlogs />} />
-              <Route path="/myBlogs/:id" element={<BlogDetail />} />{" "}
+              <Route path="/myBlogs/:id" element={<BlogDetail />} />
+              <Route path="*" element={<Navigate to="/blogs" replace />} />
             </>
           )}
         </Routes>

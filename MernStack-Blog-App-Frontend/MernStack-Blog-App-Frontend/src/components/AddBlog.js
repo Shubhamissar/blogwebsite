@@ -71,7 +71,7 @@ const AddBlog = () => {
             name="title"
             onChange={handleChange}
             value={inputs.title}
-            margin="auto"
+            margin="normal"
             variant="outlined"
           />
           <InputLabel className={classes.font} sx={labelStyles}>
@@ -82,7 +82,7 @@ const AddBlog = () => {
             name="description"
             onChange={handleChange}
             value={inputs.description}
-            margin="auto"
+            margin="normal"
             variant="outlined"
           />
           <InputLabel className={classes.font} sx={labelStyles}>
