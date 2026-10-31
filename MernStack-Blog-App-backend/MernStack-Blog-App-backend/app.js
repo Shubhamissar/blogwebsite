@@ -10,7 +10,6 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/user", router);
 app.use("/api/blog", blogRouter);
-//const db= async ()=>{const con=await mongoose.connect("mongodb+srv://shubham:<password>@cluster0.qvt2fgu.mongodb.net/?retryWrites=true&w=majority");
 const connectDb= async()=>{
   try {
    const conn= await mongoose.connect("mongodb+srv://shubham:${process.env.MONGODB_PASSWORD}@cluster0.qvt2fgu.mongodb.net/?retryWrites=true&w=majority", {
@@ -23,6 +22,8 @@ const connectDb= async()=>{
       }
  }
 connectDb();
-app.listen(5000,()=>{
-  console.log("app listning");
-})
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log("app listning on " + PORT);
+});
+
