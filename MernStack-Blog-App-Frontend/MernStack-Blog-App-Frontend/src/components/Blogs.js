@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Blog from "./Blog";
 
-const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API = process.env.REACT_APP_API_URL || "https://blog-backend-j8v1.onrender.com";
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);

@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useStyles } from "./utils";
 
-const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const API = process.env.REACT_APP_API_URL || "https://blog-backend-j8v1.onrender.com";
 
 const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
   const classes = useStyles();
